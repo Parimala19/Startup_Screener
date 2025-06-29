@@ -7,7 +7,7 @@ st.title("🚀 Startup Screener – Idea Evaluator")
 st.markdown("Give me your startup idea and I’ll evaluate its potential!")
 
 # Get API key from secrets.toml
-genai.configure(api_key=st.secrets["GOOGLE_API_KEY"])
+genai.configure(api_key="AIzaSyCG5gZbNfzYlHLw1qQww_5N6CY5r7Y5jJ0")
 
 # Initialize Gemini model
 model = genai.GenerativeModel('gemini-pro')
