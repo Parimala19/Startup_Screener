@@ -6,16 +6,20 @@ genai.configure(api_key="AIzaSyC4nD33wVtoclwz0JDSvRGmQeCg-aHq6xc")
 
 st.title("Model Selector and Text Generator")
 
+# Fetch available models
 try:
     all_models = list(genai.list_models())
 except Exception as e:
     st.error(f"Failed to fetch models: {e}")
     st.stop()
 
+# Get model names for dropdown
 model_names = [model.display_name for model in all_models]
 
+# Select model
 selected_name = st.selectbox("Choose a model:", model_names)
 
+# Find the selected model object
 try:
     selected_model = next(m for m in all_models if m.display_name == selected_name)
 except StopIteration:
@@ -24,20 +28,23 @@ except StopIteration:
 
 st.write(f"Selected Model ID: {selected_model.name}")
 
+# Instantiate generative model
 model = genai.GenerativeModel(selected_model.name)
 
+# Prompt input
 user_prompt = st.text_area("Enter your prompt:")
 
-if st.button("Generate Text"):
+if st.button("Check Idea"):
     if not user_prompt.strip():
         st.warning("Please enter a prompt.")
     else:
-        with st.spinner("Generating..."):
+        with st.spinner("Validatinggg..."):
             try:
+                # Generate content using model
                 response = model.generate_content(user_prompt)
                 
                 if response.candidates:
-                    # CORRECTED LINE: Access text from content parts
+                    # Extract generated text from first candidate
                     generated_text = response.candidates[0].content.parts[0].text
                     st.subheader("Generated Text:")
                     st.write(generated_text)
