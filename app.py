@@ -34,7 +34,7 @@ if st.button("Generate Text"):
     else:
         with st.spinner("Generating..."):
             try:
-                response = model.generate(prompt=user_prompt)
+                response = model.generate_content(prompt=user_prompt)
                 generated_text = next(response.candidates).output
                 st.subheader("Generated Text:")
                 st.write(generated_text)
