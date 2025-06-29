@@ -34,12 +34,11 @@ if st.button("Generate Text"):
     else:
         with st.spinner("Generating..."):
             try:
-                # CORRECTED LINE: Pass user_prompt directly
                 response = model.generate_content(user_prompt)
                 
-                # Check if candidates exist and then access the output
                 if response.candidates:
-                    generated_text = response.candidates[0].text
+                    # CORRECTED LINE: Access text from content parts
+                    generated_text = response.candidates[0].content.parts[0].text
                     st.subheader("Generated Text:")
                     st.write(generated_text)
                 else:
