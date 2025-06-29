@@ -1,19 +1,19 @@
 import streamlit as st
 import google.generativeai as genai
 
-# Set API key
+# Configure your API key here
 genai.configure(api_key="AIzaSyC4nD33wVtoclwz0JDSvRGmQeCg-aHq6xc")
 
 st.title("Model Selector and Text Generator")
 
 try:
-    # List models - use the client method directly
-    all_models = genai.models.list()
+    # genai.list_models() returns a generator; convert to list
+    all_models = list(genai.list_models())
 except Exception as e:
     st.error(f"Failed to fetch models: {e}")
     st.stop()
 
-model_names = [m.display_name for m in all_models]
+model_names = [model.display_name for model in all_models]
 
 selected_name = st.selectbox("Choose a model:", model_names)
 
@@ -36,6 +36,7 @@ if st.button("Generate Text"):
         with st.spinner("Generating..."):
             try:
                 response = model.generate_text(prompt=user_prompt)
+                # response.candidates is a generator, get the first candidate
                 generated_text = next(response.candidates).output
                 st.subheader("Generated Text:")
                 st.write(generated_text)
