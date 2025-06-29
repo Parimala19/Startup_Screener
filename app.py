@@ -10,7 +10,8 @@ st.markdown("Give me your startup idea and I’ll evaluate its potential!")
 genai.configure(api_key="AIzaSyCG5gZbNfzYlHLw1qQww_5N6CY5r7Y5jJ0")
 
 # Initialize Gemini model
-model = genai.GenerativeModel('gemini-pro')
+model = genai.GenerativeModel('text-bison-001')
+
 
 # Keep chat history
 if "chat_history" not in st.session_state:
