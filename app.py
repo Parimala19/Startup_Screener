@@ -2,7 +2,7 @@ import streamlit as st
 import google.generativeai as genai
 
 # Replace with your actual Google Generative AI API key
-genai.configure(api_key="AIzaSyC4nD33wVtoclwz0JDSvRGmQeCg-aHq6xc")
+genai.configure(api_key="")
 
 st.title("Startup Idea Validator and Enhancer")
 st.markdown("Enter your startup idea below, and I'll help you assess its novelty and potential for growth!")
@@ -111,3 +111,4 @@ if st.button("Analyze Idea"):
 
             except Exception as e:
                 st.error(f"An error occurred during analysis: {e}")
+
